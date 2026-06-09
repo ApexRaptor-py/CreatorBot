@@ -127,4 +127,15 @@ async def setuproles(ctx):
 
         await ctx.send("✅ Permanent role message created.")
 
+@bot.command()
+async def help(ctx):
+    await ctx.send(
+        "🦖 **Raptor Herald Commands** 🦖\n\n"
+        "🏓 !ping - Check if the bot is online\n"
+        "🔗 !links - View social links\n"
+        "🎥 !latestvideo - View the latest YouTube upload\n"
+        "📢 !announce - Create an announcement\n"
+        "🦖 !help - Show this command list"
+    )
+
 bot.run(TOKEN)
