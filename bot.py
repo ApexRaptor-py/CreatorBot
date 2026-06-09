@@ -18,6 +18,15 @@ TWITCH_CHANNEL_ID = 1513907039968034886
 
 last_video_link = None
 twitch_is_live = False
+REACTION_ROLES = {
+    "🔴": "YouTube Notifications",
+    "🟣": "Stream Notifications",
+    "🇪🇺": "Europe",
+    "🇺🇸": "North America",
+    "🎮": "Gaming",
+    "🎵": "Music",
+    "🎬": "Movies & TV",
+}
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -194,4 +203,40 @@ async def check_twitch():
     if not live_now:
         twitch_is_live = False
 
+@bot.event
+async def on_raw_reaction_add(payload):
+
+    if payload.user_id == bot.user.id:
+        return
+
+    emoji = str(payload.emoji)
+
+    if emoji not in REACTION_ROLES:
+        return
+
+    guild = bot.get_guild(payload.guild_id)
+    member = guild.get_member(payload.user_id)
+
+    role_name = REACTION_ROLES[emoji]
+    role = discord.utils.get(guild.roles, name=role_name)
+
+    if role:
+        await member.add_roles(role)
+
+@bot.event
+async def on_raw_reaction_remove(payload):
+
+    emoji = str(payload.emoji)
+
+    if emoji not in REACTION_ROLES:
+        return
+
+    guild = bot.get_guild(payload.guild_id)
+    member = guild.get_member(payload.user_id)
+
+    role_name = REACTION_ROLES[emoji]
+    role = discord.utils.get(guild.roles, name=role_name)
+
+    if role:
+        await member.remove_roles(role)
 bot.run(TOKEN)
