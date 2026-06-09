@@ -82,9 +82,12 @@ async def check_youtube():
         channel = bot.get_channel(YOUTUBE_CHANNEL_ID)
 
         if channel:
-            await channel.send(
-                f"@everyone\n\n🎥 **New Video Uploaded!**\n{latest.title}\n{latest.link}"
-            )
+           await channel.send(
+    f"@everyone\n\n"
+    f"🎥 **New video from Apexx_Raptorr!**\n\n"
+    f"**{latest.title}**\n\n"
+    f"🔗 {latest.link}"
+)
 
 @bot.event
 async def on_member_join(member):
@@ -93,7 +96,7 @@ async def on_member_join(member):
     if channel:
         await channel.send(
             f"🎉 Welcome {member.mention}!\n\n"
-            f"Thanks for joining the Apex Raptor community!\n"
+            f"Thanks for joining the Apexx_Raptorr community!\n"
             f"Be sure to check out #announcements and enjoy your stay!"
         )
 
