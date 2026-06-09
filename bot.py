@@ -20,6 +20,7 @@ VERIFY_CHANNEL_ID = 1513922042821349516
 last_video_link = None
 twitch_is_live = False
 REACTION_ROLES = {
+    "✅": "Pack Member",
     "🔴": "YouTube Notifications",
     "🟣": "Stream Notifications",
     "🇪🇺": "Europe",
@@ -227,7 +228,14 @@ async def on_raw_reaction_add(payload):
     role = discord.utils.get(guild.roles, name=role_name)
 
     if role:
-        await member.add_roles(role)
+        if role:
+            await member.add_roles(role)
+
+    if role_name == "Pack Member":
+        hatchling_role = discord.utils.get(guild.roles, name="Hatchling")
+
+        if hatchling_role:
+            await member.remove_roles(hatchling_role)
 
 @bot.event
 async def on_raw_reaction_remove(payload):
