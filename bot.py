@@ -15,6 +15,7 @@ WELCOME_CHANNEL_ID = 1513663145787523142
 ROLES_CHANNEL_ID = 1513869229806583948
 YOUTUBE_CHANNEL_ID = 1513906449066229850
 TWITCH_CHANNEL_ID = 1513907039968034886
+VERIFY_CHANNEL_ID = 1513922042821349516
 
 last_video_link = None
 twitch_is_live = False
@@ -244,4 +245,22 @@ async def on_raw_reaction_remove(payload):
 
     if role:
         await member.remove_roles(role)
+
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def setupverify(ctx):
+    channel = bot.get_channel(VERIFY_CHANNEL_ID)
+
+    if channel:
+        message = await channel.send(
+            "🦖 **Join the Pack**\n\n"
+            "Welcome, Hatchling!\n\n"
+            "Please read the rules, then react with ✅ to become a **Pack Member** "
+            "and unlock the rest of the server."
+        )
+
+        await message.add_reaction("✅")
+
+        await ctx.send("✅ Verification message created.")
+
 bot.run(TOKEN)
