@@ -106,15 +106,20 @@ async def check_youtube():
 
 @bot.event
 async def on_member_join(member):
+
+    role = discord.utils.get(member.guild.roles, name="Hatchling")
+
+    if role:
+        await member.add_roles(role)
+
     channel = bot.get_channel(WELCOME_CHANNEL_ID)
 
     if channel:
         await channel.send(
             f"🎉 Welcome {member.mention}!\n\n"
-            f"Thanks for joining the Apexx_Raptorr community!\n"
+            f"Thanks for joining the Apex Raptor community!\n"
             f"Be sure to check out #announcements and enjoy your stay!"
         )
-
 @bot.command()
 async def testwelcome(ctx):
     channel = bot.get_channel(WELCOME_CHANNEL_ID)
