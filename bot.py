@@ -105,11 +105,12 @@ async def testwelcome(ctx):
         )
 
 @bot.command()
-async def roles(ctx):
+@commands.has_permissions(administrator=True)
+async def setuproles(ctx):
     channel = bot.get_channel(ROLES_CHANNEL_ID)
 
     if channel:
-        await channel.send(
+        message = await channel.send(
             "**Choose your roles:**\n\n"
             "🔴 YouTube Notifications\n"
             "🟣 Stream Notifications\n"
@@ -118,7 +119,12 @@ async def roles(ctx):
             "🎮 Gaming\n"
             "🎵 Music\n"
             "🎬 Movies & TV\n\n"
-            "React to this message to get a role."
+            "React to this message to get or remove a role."
         )
+
+        for emoji in ["🔴", "🟣", "🇪🇺", "🇺🇸", "🎮", "🎵", "🎬"]:
+            await message.add_reaction(emoji)
+
+        await ctx.send("✅ Permanent role message created.")
 
 bot.run(TOKEN)
