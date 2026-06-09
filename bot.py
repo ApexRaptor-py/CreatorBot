@@ -10,6 +10,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 ANNOUNCEMENT_CHANNEL_ID = 1513660892091256842
 WELCOME_CHANNEL_ID = 1513663145787523142
 ROLES_CHANNEL_ID = 1513869229806583948
+YOUTUBE_CHANNEL_ID = 1513906449066229850
 
 last_video_link = None
 
@@ -78,7 +79,7 @@ async def check_youtube():
 
         last_video_link = latest.link
 
-        channel = bot.get_channel(ANNOUNCEMENT_CHANNEL_ID)
+        channel = bot.get_channel(YOUTUBE_CHANNEL_ID)
 
         if channel:
             await channel.send(
