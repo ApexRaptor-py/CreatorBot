@@ -9,6 +9,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 
 ANNOUNCEMENT_CHANNEL_ID = 1513660892091256842
 WELCOME_CHANNEL_ID = 1513663145787523142
+ROLES_CHANNEL_ID = 1513869229806583948
 
 last_video_link = None
 
@@ -101,6 +102,23 @@ async def testwelcome(ctx):
         await channel.send(
             f"Welcome {ctx.author.mention}! 🎉\n"
             f"Thanks for joining the server!"
+        )
+
+@bot.command()
+async def roles(ctx):
+    channel = bot.get_channel(ROLES_CHANNEL_ID)
+
+    if channel:
+        await channel.send(
+            "**Choose your roles:**\n\n"
+            "🔴 YouTube Notifications\n"
+            "🟣 Stream Notifications\n"
+            "🇪🇺 Europe\n"
+            "🇺🇸 North America\n"
+            "🎮 Gaming\n"
+            "🎵 Music\n"
+            "🎬 Movies & TV\n\n"
+            "React to this message to get a role."
         )
 
 bot.run(TOKEN)
