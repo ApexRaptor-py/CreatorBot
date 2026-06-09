@@ -36,6 +36,7 @@ async def links(ctx):
     )
 
 @bot.command()
+@commands.has_permissions(administrator=True)
 async def announce(ctx, link, *, message):
     await ctx.message.delete()
 
